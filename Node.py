@@ -19,19 +19,19 @@ class Node:
             next_address, message_content = self.decrypt_data(data)
 
             if self.next_node_address:
-                # Forward message to the next node
+
                 next_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 next_socket.connect(self.next_node_address)
                 next_socket.send(message_content)
 
-                # Receive the response from the next node
+
                 response = next_socket.recv(4096)
                 next_socket.close()
 
-                # Encrypt the response and send it back
+
                 client_socket.send(self.encrypt_data(response))
             else:
-                # Pass the message to the exit node
+
                 client_socket.send(message_content)
 
             client_socket.close()

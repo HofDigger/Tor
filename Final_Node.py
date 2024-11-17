@@ -16,7 +16,7 @@ class ExitNode:
             query = client_socket.recv(1024).decode()
             response = self.handle_request(query)
 
-            # Send response back to the previous node
+
             client_socket.send(response.encode())
             client_socket.close()
 
@@ -24,6 +24,6 @@ class ExitNode:
         search_url = f"https://duckduckgo.com/?q={query}"
         response = requests.get(search_url)
         if response.status_code == 200:
-            return response.text[:500]  # חלק מהתוצאה
+            return response.text[:500]
         else:
             return "Failed to retrieve search results."

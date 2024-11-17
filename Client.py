@@ -15,11 +15,11 @@ class Client:
         sock.connect(first_node_address)
         sock.send(data)
 
-        # Receive the response from the first node
+
         response = sock.recv(4096)
         sock.close()
 
-        # Decrypt the response as it passes back through the nodes
+
         for node in self.nodes:
             response = self.decrypt_data(response, node['key'])
 
